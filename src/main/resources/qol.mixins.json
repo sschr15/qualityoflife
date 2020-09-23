@@ -1,0 +1,23 @@
+{
+    "package": "sschr15.qol.mixin",
+    "plugin": "sschr15.qol.util.mixin.MixinPlugin",
+    "minVersion": "0.8",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "client.GuiNewChatMixin",
+        "common.BlockSpongeMixin",
+        "client.MinecraftMixin",
+        "common.ChunkMixin",
+        "common.CrashReportMixin",
+        "common.EntityPlayerMixin",
+        "common.EntityPlayerMPMixin",
+        "common.PotionEffectMixin",
+        "common.PotionUtilsMixin",
+        "mod.inventorytweaks.InvTweaksHandlerSortingMixin",
+        "mod.minecraftforge.GameDataMixin",
+        "server.MinecraftServerMixin"
+    ],
+    "client": [
+        "client.KeyBindingMixin"
+    ]
+}

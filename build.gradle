@@ -1,0 +1,136 @@
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url 'https://repo.spongepowered.org/maven/' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'maven-publish'
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+
+group = 'sschr15'
+version = '1.0.0'
+archivesBaseName = 'qol'
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+
+mixin {
+    add sourceSets.main, 'qol.mixins.refmap.json'
+}
+
+repositories {
+    maven { url 'https://dvs1.progwm16.com/files/maven' }
+    maven { url 'https://repo.spongepowered.org/maven' }
+    maven { url 'https://www.cursemaven.com' }
+    maven { url 'https://modmaven.k-4u.nl' }
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+
+minecraft {
+    mappings channel: 'stable', version: '39-1.12'
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // Default run configurations.
+    // These can be tweaked, removed, or duplicated as needed.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            property 'fml.coreMods.load', 'sschr15.qol.util.mixin.MixinSetupCoremod'
+            property 'mixin.hotSwap', 'true'
+            property 'mixin.checks.interfaces', 'true'
+
+            mods {
+                qualityoflife {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            property 'fml.coreMods.load', 'sschr15.qol.util.mixin.MixinSetupCoremod'
+            property 'mixin.hotSwap', 'true'
+            property 'mixin.checks.interfaces', 'true'
+
+            mods {
+                qualityoflife {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+configurations {
+    embed
+    implementation.extendsFrom(embed)
+}
+
+dependencies {
+    // minecraft
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
+
+    // basic utilities
+    embed(group: 'org.spongepowered', name: 'mixin', version: '0.8-SNAPSHOT') {
+        transitive(false)
+    }
+    embed group: 'org.reflections', name: 'reflections', version: '0.9.12'
+
+    implementation group: 'curse.maven', name: 'InventoryTweaks', version: '2482483'
+
+    // Additions :)
+    //runtimeOnly group: 'curse.maven', name: 'LootOverhaul-1.2', version: '2711741'
+    //implementation group: 'com.github.sschr15', name: 'Additions', version: 'nojei-SNAPSHOT'
+}
+
+jar {
+    from(configurations.embed.collect {it.isDirectory() ? it : zipTree(it) }) {
+        exclude 'LICENSE.txt', 'META-INF/MANIFSET.MF', 'META-INF/maven/**', 'META-INF/*.RSA', 'META-INF/*.SF'
+    }
+
+    manifest.attributes(
+            'FMLCorePluginContainsFMLMod': true,
+            'ForceLoadAsMod': true,
+            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+            'FMLCorePlugin': 'sschr15.qol.util.mixin.MixinSetupCoremod'
+    )
+
+    finalizedBy('reobfJar')
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}

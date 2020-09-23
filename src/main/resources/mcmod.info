@@ -1,0 +1,18 @@
+[
+    {
+        "modid": "qol",
+        "name": "QualityOfLife",
+        "description": "Makes small changes for various things",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "url": "",
+        "updateUrl": "",
+        "authorList": [
+            "sschr15"
+        ],
+        "credits": "",
+        "logoFile": "",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
