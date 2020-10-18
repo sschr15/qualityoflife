@@ -13,5 +13,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface QOLSubscriber {
+    /** The mod ID. */
     String value();
+
+    /** An optional priority. The lower the number, the higher the priority */
+    int priority() default 0;
 }

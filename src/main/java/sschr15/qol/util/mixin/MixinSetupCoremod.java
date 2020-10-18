@@ -19,6 +19,7 @@ import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.util.CompoundDataFixer;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
+import net.minecraftforge.fml.relauncher.FMLInjectionData;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.Name;
@@ -43,7 +44,7 @@ public class MixinSetupCoremod implements IFMLLoadingPlugin {
         ReflectionTool.setField(Loader.instance(), "injectedContainers",
                 Lists.newArrayList("net.minecraftforge.fml.common.FMLContainer",
                         "net.minecraftforge.common.ForgeModContainer"), true);
-        ReflectionTool.setField(Loader.instance(), "minecraftDir", new File("."), true);
+        ReflectionTool.setField(Loader.instance(), "minecraftDir", (File) FMLInjectionData.data()[6], true);
 
         // we gotta fake a sided delegate :)
         ReflectionTool.setField(FMLCommonHandler.instance(), "sidedDelegate", new FakeSidedDelegate(), false);

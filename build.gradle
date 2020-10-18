@@ -1,5 +1,4 @@
 buildscript {
-    ext.kotlin_version = '1.4.10'
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url 'https://repo.spongepowered.org/maven/' }
@@ -21,8 +20,10 @@ apply plugin: 'org.spongepowered.mixin'
 
 group = 'sschr15'
 version = '1.0.0'
+//noinspection GroovyUnusedAssignment
 archivesBaseName = 'qol'
 
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 mixin {
@@ -95,6 +96,8 @@ configurations {
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:19.0.0'
+
     // minecraft
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
 

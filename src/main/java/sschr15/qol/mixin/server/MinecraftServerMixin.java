@@ -10,12 +10,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.WorldServer;
 
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin {
     @Shadow @Final private static Logger LOGGER;
-    @Shadow public WorldServer[] worlds;
     @Shadow private String worldName;
 
     @Redirect(method = "run", at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), remap = false)

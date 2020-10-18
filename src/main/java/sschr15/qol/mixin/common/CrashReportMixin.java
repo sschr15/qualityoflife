@@ -1,6 +1,5 @@
 package sschr15.qol.mixin.common;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +11,6 @@ import sschr15.qol.code.QualityOfLife;
 import sschr15.qol.util.QOLSubscriberCaller;
 
 import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
 import net.minecraftforge.fml.common.Loader;
 
 import java.lang.reflect.Method;
@@ -23,7 +21,6 @@ import java.util.Random;
 
 @Mixin(CrashReport.class)
 public abstract class CrashReportMixin {
-    @Shadow @Final private CrashReportCategory systemDetailsCategory;
     @Shadow public abstract String getCauseStackTraceOrString();
 
     @Redirect(method = "getCompleteReport", at = @At(value = "INVOKE", target = "Lnet/minecraft/crash/CrashReport;getCauseStackTraceOrString()Ljava/lang/String;"))
