@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sschr15.qol.api.annotations.qolevents.WittyCommentSubscriber;
+import sschr15.qol.api.annotations.qolevents.QOLSubscriber;
 import sschr15.qol.code.QualityOfLife;
 import sschr15.qol.util.QOLSubscriberCaller;
 
@@ -43,7 +43,7 @@ public abstract class CrashReportMixin {
     @Inject(method = "getWittyComment", at = @At("HEAD"), cancellable = true)
     private static void getWittyComment(CallbackInfoReturnable<String> cir) {
         Random random = new Random(System.currentTimeMillis());
-        List<Method> methods = QOLSubscriberCaller.getMethods(WittyCommentSubscriber.class);
+        List<Method> methods = QOLSubscriberCaller.getMethods(QOLSubscriber.WittyCommentSubscriber.class);
         Collections.shuffle(methods, random);
         String output = null;
         Iterator<Method> methodIterator = methods.iterator();

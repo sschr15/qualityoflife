@@ -31,11 +31,15 @@ mixin {
 }
 
 repositories {
-    maven { url 'https://dvs1.progwm16.com/files/maven' }
+//    maven { url 'https://dvs1.progwm16.com/files/maven' }
     maven { url 'https://repo.spongepowered.org/maven' }
     maven { url 'https://www.cursemaven.com' }
     maven { url 'https://modmaven.k-4u.nl' }
     maven { url 'https://jitpack.io' }
+    maven {
+        url 'http://files.minecraftforge.net/maven/'
+        name 'MinecraftForge maven because Forgegradle is dumb'
+    }
     mavenCentral()
 }
 

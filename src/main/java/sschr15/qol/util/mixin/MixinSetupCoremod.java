@@ -5,9 +5,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
+import sschr15.qol.api.AsmTransformer;
 import sschr15.qol.api.GeneralUtils;
 import sschr15.qol.api.annotations.MixinConfig;
-import sschr15.qol.api.annotations.qolevents.RunOnCoremodLoad;
+import sschr15.qol.api.annotations.qolevents.QOLSubscriber;
 import sschr15.qol.code.Ref;
 import sschr15.qol.util.QOLSubscriberCaller;
 import sschr15.qol.util.ReflectionTool;
@@ -79,7 +80,7 @@ public class MixinSetupCoremod implements IFMLLoadingPlugin {
         mixinFileThings.asMap().forEach((b, s) -> Mixins.addConfigurations(s.toArray(new String[0])));
 
         // Questionable thing #2: using Annotations to allow other mods to run code before they should :)
-        QOLSubscriberCaller.getMethods(RunOnCoremodLoad.class).forEach(method -> {
+        QOLSubscriberCaller.getMethods(QOLSubscriber.RunOnCoremodLoad.class).forEach(method -> {
             try {
                 method.invoke(new Object());
             } catch (ReflectiveOperationException e) {
@@ -90,7 +91,7 @@ public class MixinSetupCoremod implements IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[0];
+        return new String[]{AsmTransformer.class.getName()};
     }
 
     @Override

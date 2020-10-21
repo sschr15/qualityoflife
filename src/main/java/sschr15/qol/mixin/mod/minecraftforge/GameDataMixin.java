@@ -1,5 +1,6 @@
 package sschr15.qol.mixin.mod.minecraftforge;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,5 +29,9 @@ public abstract class GameDataMixin implements IGameData {
     @Override
     public List<Ref.ConflictingResource> getConflictingResourceList() {
         return CONFLICTING_RESOURCE_LIST;
+    }
+
+    static {
+        LogManager.getLogger().error("HAHA! This class not to be used by modders, but *here we are!*");
     }
 }

@@ -1,5 +1,7 @@
 package sschr15.qol.api;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
 
 import net.minecraftforge.fml.common.ModContainer;
@@ -35,18 +37,6 @@ public class GeneralUtils {
         return REFLECTIONS;
     }
 
-    /**
-     * Place a number in a range
-     * @param min the minimum value
-     * @param num the number
-     * @param max the maximum value
-     * @return the value as a double
-     */
-    public static Number range(Number min, Number num, Number max) {
-        assert min.doubleValue() <= max.doubleValue();
-        return Math.min(max.doubleValue(), Math.max(num.doubleValue(), min.doubleValue()));
-    }
-
     public static List<ModContainer> getLoadedMods() {
         return LOADED_MODS == null ? Collections.emptyList() : LOADED_MODS;
     }
@@ -54,5 +44,11 @@ public class GeneralUtils {
     public static List<String> getLoadedModIds() {
         if (LOADED_MODS == null) return Collections.emptyList();
         return LOADED_MODS.stream().map(ModContainer::getModId).collect(Collectors.toList());
+    }
+
+    @NotNull
+    public static String toString(@Nullable Object o) {
+        if (o == null) return "null";
+        else return o.toString();
     }
 }

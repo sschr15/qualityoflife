@@ -4,6 +4,7 @@
     "minVersion": "0.8",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+        "common.AntiSnooperMixin",
         "common.BlockSpongeMixin",
         "common.ChunkMixin",
         "common.CrashReportMixin",
@@ -11,14 +12,13 @@
         "common.EntityPlayerMPMixin",
         "common.PotionEffectMixin",
         "common.PotionUtilsMixin",
-
         "mod.inventorytweaks.InvTweaksHandlerSortingMixin",
         "mod.minecraftforge.GameDataMixin"
     ],
     "client": [
         "client.GuiNewChatMixin",
-        "client.MinecraftMixin",
-        "client.KeyBindingMixin"
+        "client.KeyBindingMixin",
+        "client.MinecraftMixin"
     ],
     "server": [
         "server.MinecraftServerMixin"

@@ -1,8 +1,7 @@
 package sschr15.qol.code;
 
 import sschr15.qol.api.annotations.qolevents.QOLSubscriber;
-import sschr15.qol.api.annotations.qolevents.RunOnCoremodLoad;
-import sschr15.qol.api.annotations.qolevents.WittyCommentSubscriber;
+import sschr15.qol.api.annotations.qolevents.QOLSubscriber.*;
 
 import java.util.Random;
 
@@ -17,4 +16,12 @@ public class QOLQOLEventSubscriber {
     public static void onCoremodLoad() {
         Ref.LOGGER.info("Ran on Coremod load!");
     }
+
+//    @TransformClass("net.minecraft.client.Minecraft")
+//    public static void transformMinecraft(ClassNode classNode, String className) {
+//        AtomicBoolean b = new AtomicBoolean(false);
+//        classNode.methods.forEach(methodNode -> {
+//            Ref.LOGGER.info(methodNode.name);
+//        });
+//    }
 }

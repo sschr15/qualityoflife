@@ -3,7 +3,7 @@ package sschr15.qol.code;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import sschr15.qol.api.annotations.MixinConfig;
-import sschr15.qol.api.annotations.qolevents.RunOnCoremodLoad;
+import sschr15.qol.api.annotations.qolevents.QOLSubscriber;
 import sschr15.qol.interfaces.IGameData;
 
 import net.minecraftforge.fml.common.FMLLog;
@@ -49,19 +49,23 @@ public class QualityOfLife {
     public void loadingComplete(FMLLoadCompleteEvent event) {
         if (IGameData.class.isAssignableFrom(GameData.class)) {
             //noinspection InstantiationOfUtilityClass
+            @SuppressWarnings("ConstantConditions")
             List<Ref.ConflictingResource> conflictingResourceList = ((IGameData) new GameData()).getConflictingResourceList();
 
             Multimap<String, String> multimap = HashMultimap.create();
-            conflictingResourceList.forEach(a -> multimap.put(String.format("%s -> %s", a.expectedPrefix, a.setPrefix), a.resourceName));
+            for (Ref.ConflictingResource a : conflictingResourceList) {
+                // the reason we don't just use foreach is because :concern:
+                multimap.put(String.format("%s -> %s", a.expectedPrefix, a.setPrefix), a.resourceName);
+            }
 
             if (!multimap.isEmpty()) {
                 FMLLog.log.warn("Alternative prefixes were found!");
-                multimap.asMap().forEach((prefixThing, names) -> FMLLog.log.warn("Prefixes mapped " + prefixThing + ": " + String.join(", ", names.toArray(new String[0]))));
+                multimap.asMap().forEach((prefixThing, names) -> FMLLog.log.warn("Prefixes mapped " + prefixThing + ": " + String.join(", ", names)));
             }
         }
     }
 
-    @RunOnCoremodLoad
+    @QOLSubscriber.RunOnCoremodLoad
     public static void runOnCoremodLoad() {
         Ref.LOGGER.error("Loaded");
     }

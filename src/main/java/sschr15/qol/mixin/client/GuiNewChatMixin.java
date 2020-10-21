@@ -9,6 +9,9 @@ import net.minecraft.client.gui.GuiNewChat;
 
 @Mixin(GuiNewChat.class)
 public abstract class GuiNewChatMixin {
+    /**
+     * @reason [CHAT] I don't want to see this every time a message is sent!
+     */
     @Redirect(method = "printChatMessageWithOptionalDeletion", at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;)V"))
     private void silenceInfo(Logger logger, String format, Object o) {
         logger.debug(format, o);
