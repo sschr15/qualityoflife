@@ -19,7 +19,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'sschr15'
-version = '1.0.0'
+version = '1.0.1'
 //noinspection GroovyUnusedAssignment
 archivesBaseName = 'qol'
 
