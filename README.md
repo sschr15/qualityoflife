@@ -6,9 +6,26 @@ to the Event Bus, and it cleans up a bit of stuff.
 
 **Want an event or a new feature? Submit an issue!**
 
+## Adding this to your mod
+
+To add this to your mod, add the maven and the mod dependency to your `build.gradle`:
+```groovy
+repositories {
+    maven { url 'http://maven.concern.i.ng' }
+}
+
+dependencies {
+    // ForgeGradle 3:
+    fg.deobf implementation(group: 'sschr15', name: 'qol', version: '1.0.0')
+    
+    // ForgeGradle 2.3:
+    deobfCompile 'sschr15:qol:1.0.0' 
+}
+```
+
 ## Examples
 
-Now that I have [added the mod](#Adding this to your mod) to my dev environment, how might I do
+Now that I have added the mod to my dev environment, how might I do
 something? Do I want to use Mixins? Do I want to use events? Find out here!
 
 ### Registering Mixin
@@ -54,6 +71,19 @@ public class ExampleEventSubscriber {
 
 Want to see the events? Check out `sschr15.qol.api.events`!
 
+### QOLEvents
+
+Forge events? No! Use your QOLEvents for some more... *questionable* content...
+```java
+@QOLSubscriber("example")
+public class MySubscriber {
+    @QOLSubscriber.TransformClass("net.minecraft.client.Minecraft")
+    public static void transform(ClassNode node, String name) {
+        // You can transform classes with this!
+    }
+}
+```
+
 ### Other Stuffs
 
 #### `GeneralUtils`
@@ -63,7 +93,6 @@ I have a `GeneralUtils` tool with a couple useful methods:
 - `reflections()`: a [`Reflections`](https://github.com/ronmamo/reflections) object
 - `getAnnotatedClasses(clazz)`: a `Set` of `Class<?>` that have `clazz` as an annotation
 - `getSubclasses(clazz)`: a `Set` of `Class<?>` that are subclasses of `clazz`
-- `range(min, num, max)`: limit `num` to be within `min` and `max`
 
 ## Building/Running
 
@@ -74,19 +103,3 @@ To build the mod, run `./gradlew build`
 To run the mod in a development environment, run `./gradlew runClient` for a client
 and `./gradlew runServer` for a server.
 
-## Adding this to your mod
-
-To add this to your mod, add the maven and the mod dependency to your `build.gradle`:
-```groovy
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-
-dependencies {
-    // ForgeGradle 3:
-    fg.deobf implementation(group: 'com.github.sschr15', name: 'qol', version: '1.0.0')
-    
-    // ForgeGradle 2.3:
-    deobfCompile 'com.github.sschr15:qol:1.0.0' 
-}
-```

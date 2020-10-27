@@ -12,6 +12,7 @@ import net.minecraftforge.registries.GameData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Mixin(value = GameData.class, remap = false)
 public abstract class GameDataMixin implements IGameData {
@@ -32,6 +33,16 @@ public abstract class GameDataMixin implements IGameData {
     }
 
     static {
-        LogManager.getLogger().error("HAHA! This class not to be used by modders, but *here we are!*");
+        String[] loggerOptions = {
+                "HAHA! This class is not meant to be used by modders, but *here we are!*",
+                "haha mixin go brrr",
+                "This error is brought to you by Forge being :concern:",
+                ":concernedtater:",
+                "gradle 6 broke everything by requiring pom files",
+                ":voldethonk:",
+                "Why are you still using Forge 1.12.2? You should switch to https://fabricmc.net instead!"
+        };
+
+        LogManager.getLogger().error(loggerOptions[new Random().nextInt(loggerOptions.length)]);
     }
 }

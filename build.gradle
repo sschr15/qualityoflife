@@ -31,7 +31,6 @@ mixin {
 }
 
 repositories {
-//    maven { url 'https://dvs1.progwm16.com/files/maven' }
     maven { url 'https://repo.spongepowered.org/maven' }
     maven { url 'https://www.cursemaven.com' }
     maven { url 'https://modmaven.k-4u.nl' }
@@ -45,20 +44,13 @@ repositories {
 
 minecraft {
     mappings channel: 'stable', version: '39-1.12'
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
             property 'fml.coreMods.load', 'sschr15.qol.util.mixin.MixinSetupCoremod'
@@ -75,10 +67,8 @@ minecraft {
         server {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
             property 'fml.coreMods.load', 'sschr15.qol.util.mixin.MixinSetupCoremod'
@@ -102,20 +92,14 @@ configurations {
 dependencies {
     implementation 'org.jetbrains:annotations:19.0.0'
 
-    // minecraft
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
 
-    // basic utilities
     embed(group: 'org.spongepowered', name: 'mixin', version: '0.8-SNAPSHOT') {
         transitive(false)
     }
     embed group: 'org.reflections', name: 'reflections', version: '0.9.12'
 
     implementation group: 'curse.maven', name: 'InventoryTweaks', version: '2482483'
-
-    // Additions :)
-    //runtimeOnly group: 'curse.maven', name: 'LootOverhaul-1.2', version: '2711741'
-    //implementation group: 'com.github.sschr15', name: 'Additions', version: 'nojei-SNAPSHOT'
 }
 
 jar {

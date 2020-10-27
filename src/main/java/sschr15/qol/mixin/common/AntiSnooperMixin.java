@@ -18,7 +18,7 @@ import java.util.TimerTask;
  */
 @Mixin(targets = "net/minecraft/profiler/Snooper$1")
 public abstract class AntiSnooperMixin extends TimerTask {
-    @Redirect(method = "run", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/HttpUtil;postMap(Ljava/net/URL;Ljava/util/Map;ZLjava/net/Proxy;)Ljava/lang/String;"))
+    @Redirect(method = "run()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/HttpUtil;postMap(Ljava/net/URL;Ljava/util/Map;ZLjava/net/Proxy;)Ljava/lang/String;"))
     private String stopPostMap(URL url, Map<String, Object> map, boolean skipLoggingErrors, Proxy proxy) {
         boolean disable = QOLSubscriberCaller.getQolSubscribers().stream()
                 .map(c -> c.getAnnotation(QOLSubscriber.class))

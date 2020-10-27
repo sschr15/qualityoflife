@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sschr15.qol.api.events.KeyBindingEvent;
-import sschr15.qol.interfaces.IKeyBinding;
 import sschr15.qol.interfaces.TestInterfaces;
 
 import net.minecraft.client.settings.KeyBinding;
@@ -17,7 +16,7 @@ import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mixin(value = KeyBinding.class)
-public abstract class KeyBindingMixin implements IKeyBinding, TestInterfaces.I1 {
+public abstract class KeyBindingMixin implements TestInterfaces.I1 {
     @Shadow(remap = false) private KeyModifier keyModifierDefault;
     @Shadow private boolean pressed;
     @Shadow private int keyCode;

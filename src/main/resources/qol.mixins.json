@@ -13,7 +13,9 @@
         "common.PotionEffectMixin",
         "common.PotionUtilsMixin",
         "mod.inventorytweaks.InvTweaksHandlerSortingMixin",
-        "mod.minecraftforge.GameDataMixin"
+        "mod.minecraftforge.GameDataMixin",
+        "mod.minecraftforge.config.ConfigCategoryMixin",
+        "mod.minecraftforge.config.ConfigurationMixin"
     ],
     "client": [
         "client.GuiNewChatMixin",
