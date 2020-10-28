@@ -8,6 +8,7 @@ import sschr15.qol.interfaces.IGameData;
 
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -16,6 +17,7 @@ import net.minecraftforge.registries.GameData;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Random;
 
 @Mod(
         modid = Ref.MOD_ID,
@@ -32,7 +34,23 @@ public class QualityOfLife {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
+        String[] steps = new String[]{
+                "Abnormalizing the matrices...",
+                "Postfragmenting the widget layer...",
+                "Causing the heat death of the universe...",
+                "Setting phasers to stun...",
+                "Done!"
+        };
+        Random random = new Random();
+        ProgressManager.ProgressBar bar = ProgressManager.push("PreInit Shenanigans", 5);
+        for (String step : steps) {
+            bar.step(step);
+            try {
+                Thread.sleep(random.nextInt(1000));
+            } catch (InterruptedException ignored) {
+            }
+        }
+        ProgressManager.pop(bar);
     }
 
     @Mod.EventHandler

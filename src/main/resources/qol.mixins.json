@@ -12,10 +12,10 @@
         "common.EntityPlayerMPMixin",
         "common.PotionEffectMixin",
         "common.PotionUtilsMixin",
+        "common.TpCommandMixin",
         "mod.inventorytweaks.InvTweaksHandlerSortingMixin",
         "mod.minecraftforge.GameDataMixin",
-        "mod.minecraftforge.config.ConfigCategoryMixin",
-        "mod.minecraftforge.config.ConfigurationMixin"
+        "mod.minecraftforge.ProgressManagerMixin"
     ],
     "client": [
         "client.GuiNewChatMixin",

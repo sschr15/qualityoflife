@@ -37,6 +37,10 @@ import java.util.*;
 @MCVersion("1.12.2")
 @Name("QOL Mixin Coremod")
 public class MixinSetupCoremod implements IFMLLoadingPlugin {
+    static {
+        Ref.startPreLaunchWindow();
+    }
+
     public MixinSetupCoremod() {
         MixinBootstrap.init();
 
