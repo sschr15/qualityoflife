@@ -3,7 +3,6 @@ package sschr15.qol.code;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import sschr15.qol.api.annotations.MixinConfig;
-import sschr15.qol.api.annotations.qolevents.QOLSubscriber;
 import sschr15.qol.interfaces.IGameData;
 
 import net.minecraftforge.fml.common.FMLLog;
@@ -81,11 +80,6 @@ public class QualityOfLife {
                 multimap.asMap().forEach((prefixThing, names) -> FMLLog.log.warn("Prefixes mapped " + prefixThing + ": " + String.join(", ", names)));
             }
         }
-    }
-
-    @QOLSubscriber.RunOnCoremodLoad
-    public static void runOnCoremodLoad() {
-        Ref.LOGGER.error("Loaded");
     }
 
     public static void modFixesCrashes() {

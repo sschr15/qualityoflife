@@ -12,6 +12,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 
 @Mixin(CommandTP.class)
 public abstract class TpCommandMixin extends CommandBase {
@@ -20,13 +21,14 @@ public abstract class TpCommandMixin extends CommandBase {
         Entity teleported = args.length == 2 ? getEntity(server, sender, args[0]) : getCommandSenderAsPlayer(sender);
         Entity teleportedTo = getEntity(server, sender, args[args.length - 1]);
 
+        teleported.changeDimension(teleportedTo.dimension, ((world, entity, yaw) -> entity.moveToBlockPosAndAngles(
+                new BlockPos(teleportedTo.posX, teleportedTo.posY, teleportedTo.posZ), teleportedTo.rotationYaw, teleportedTo.rotationPitch)));
+
         if (teleported instanceof EntityPlayerMP) {
             EntityPlayerMP teleportedPlayer = (EntityPlayerMP) teleported;
-            teleportedPlayer.setWorld(teleportedTo.world);
             teleportedPlayer.connection.setPlayerLocation(teleportedTo.posX, teleportedTo.posY, teleported.posZ, teleportedTo.rotationYaw, teleportedTo.rotationPitch);
-        } else {
-            teleported.setWorld(teleportedTo.world);
-            teleported.setLocationAndAngles(teleportedTo.posX, teleportedTo.posY, teleportedTo.posZ, teleportedTo.rotationYaw, teleportedTo.rotationPitch);
         }
+
+        ci.cancel();
     }
 }

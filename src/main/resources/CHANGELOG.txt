@@ -1,5 +1,9 @@
 CHANGELOG
 
+v1.1.0 - Moderately Bigger Update
++ Added Pre Launch Window
++ Added Cross-World Player Teleportation
+
 v1.0.1 - Miniature Update
 + Added changelog :)
 - Removed unnecessary dependencies
